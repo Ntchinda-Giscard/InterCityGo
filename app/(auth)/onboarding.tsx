@@ -12,7 +12,7 @@ const OnBoarding = () => {
   return (
     <SafeAreaView className="flex-1 bg-gradient-to-b from-primary to-secondary">
       {/* Top bar */}
-      <View className="flex-row w-full justify-end p-4">
+      <View className="flex-row w-full justify-end px-4">
         <TouchableOpacity
           onPress={() => router.replace("/(auth)/login")}
           className="flex-row items-center"
@@ -31,9 +31,10 @@ const OnBoarding = () => {
         onIndexChanged={(index) => setCurrentIndex(index)}
       >
         {onboardingSteps.map((step) => (
-          <View key={step.id}>
+          <View key={step.id} className="justify-center items-center w-full">
+            {/* <Image source={step.image} contentFit="cover" /> */}
             <Text className="text-white text-xl font-bold">{step.title}</Text>
-            <Text className="text-white/80 text-md font-normal">
+            <Text className="text-white/80 text-md font-normal text-center">
               {step.description}
             </Text>
           </View>
