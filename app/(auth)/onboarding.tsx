@@ -27,6 +27,7 @@ const OnBoarding = () => {
         loop={false}
         dot={<View className="bg-white/50 w-[8px] h-[8px] rounded-full" />}
         activeDot={<View className="bg-white w-[16px] h-[8px] rounded-full" />}
+        onIndexChanged={(index) => setCurrentIndex(index)}
       >
         <View>
           <Text>Slide 1</Text>
