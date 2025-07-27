@@ -5,11 +5,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 const Profile = () => {
   return (
     <SafeAreaView>
-        <View>
+      <View>
         <Text>Profile</Text>
-        </View>
+      </View>
     </SafeAreaView>
-  )
+  );
 }
 
 export default Profile
