@@ -1,3 +1,4 @@
+import { onboardingSteps } from "@/constants/onboarding";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
@@ -29,15 +30,14 @@ const OnBoarding = () => {
         activeDot={<View className="bg-white w-[16px] h-[8px] rounded-full" />}
         onIndexChanged={(index) => setCurrentIndex(index)}
       >
-        <View>
-          <Text>Slide 1</Text>
-        </View>
-        <View>
-          <Text>Slide 2</Text>
-        </View>
-        <View>
-          <Text>Slide 3</Text>
-        </View>
+        {onboardingSteps.map((step) => (
+          <View key={step.id}>
+            <Text className="text-white text-xl font-bold">{step.title}</Text>
+            <Text className="text-white/80 text-md font-normal">
+              {step.description}
+            </Text>
+          </View>
+        ))}
       </Swiper>
     </SafeAreaView>
   );
