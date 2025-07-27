@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
+	<defs>
+		<filter id="filter8291590140" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feComponentTransfer in="SourceAlpha" result="componentTransfer9300593495">
+				<feFuncR type="linear" slope="0" intercept="0"/>
+				<feFuncG type="linear" slope="0" intercept="0"/>
+				<feFuncB type="linear" slope="0" intercept="0"/>
+				<feFuncA type="linear" slope="10000" intercept="0"/>
+			</feComponentTransfer>
+			<feComponentTransfer in="componentTransfer9300593495" result="componentTransfer1053555144">
+				<feFuncA type="linear" slope="0.1" intercept="0"/>
+			</feComponentTransfer>
+			<feMorphology operator="erode" radius="2" in="componentTransfer1053555144" result="morphology6562742496"/>
+			<feOffset dx="0" dy="2" in="morphology6562742496" result="offset4717402662"/>
+			<feGaussianBlur stdDeviation="2" in="offset4717402662" result="gaussianBlur9844074925"/>
+			<feComponentTransfer in="SourceAlpha" result="componentTransfer4203972408">
+				<feFuncR type="linear" slope="0" intercept="0"/>
+				<feFuncG type="linear" slope="0" intercept="0"/>
+				<feFuncB type="linear" slope="0" intercept="0"/>
+				<feFuncA type="linear" slope="10000" intercept="0"/>
+			</feComponentTransfer>
+			<feComponentTransfer in="componentTransfer4203972408" result="componentTransfer7945406585">
+				<feFuncA type="linear" slope="0.1" intercept="0"/>
+			</feComponentTransfer>
+			<feMorphology operator="erode" radius="1" in="componentTransfer7945406585" result="morphology1614988796"/>
+			<feOffset dx="0" dy="4" in="morphology1614988796" result="offset5710884508"/>
+			<feGaussianBlur stdDeviation="3" in="offset5710884508" result="gaussianBlur6804210098"/>
+			<feMerge>
+				<feMergeNode in="gaussianBlur9844074925"/>
+				<feMergeNode in="gaussianBlur6804210098"/>
+				<feMergeNode in="SourceGraphic"/>
+			</feMerge>
+		</filter>
+	</defs>
+	<g filter="url(#filter8291590140)">
+		<path d="M24 0C10.7452 0 0 10.7452 0 24L0 24.036C0 37.2908 10.7092 48 23.964 48L24 48C37.2548 48 48 37.2908 48 24.036L48 24C48 10.7452 37.2908 0 24.036 0L24 0Z" fill-rule="nonzero" transform="matrix(1 0 0 1 5 1)" fill="rgb(67, 56, 202)"/>
+		<defs>
+			<clipPath id="clipPath7619449077">
+				<path d="M24 0C10.7452 0 0 10.7452 0 24L0 24.036C0 37.2908 10.7092 48 23.964 48L24 48C37.2548 48 48 37.2908 48 24.036L48 24C48 10.7452 37.2908 0 24.036 0L24 0Z" fill-rule="nonzero" transform="matrix(1 0 0 1 5 1)"/>
+			</clipPath>
+		</defs>
+		<g clip-path="url(#clipPath7619449077)">
+			<defs>
+				<clipPath id="clipPath3157088036">
+					<path d="M0 0L24 0L24 24L0 24L0 0Z" fill-rule="nonzero" transform="matrix(1 0 0 1 17 13)"/>
+				</clipPath>
+			</defs>
+			<g clip-path="url(#clipPath3157088036)">
+				<path d="M3.03848 -0.274721C3.1902 -0.805752 3.74369 -1.11325 4.27472 -0.961524C4.80575 -0.809801 5.11325 -0.256309 4.96152 0.274721L0.961524 14.2747C0.809801 14.8058 0.256309 15.1132 -0.274721 14.9615C-0.805752 14.8098 -1.11325 14.2563 -0.961524 13.7253L3.03848 -0.274721Z" fill-rule="evenodd" transform="matrix(1 0 0 1 21 18)" fill="rgb(255, 255, 255)"/>
+				<path d="M-0.274721 -0.961524C-0.805752 -0.809801 -1.11325 -0.256309 -0.961524 0.274721L3.03848 14.2747C3.1902 14.8058 3.74369 15.1132 4.27472 14.9615C4.80575 14.8098 5.11325 14.2563 4.96152 13.7253L0.961524 -0.274721C0.809801 -0.805752 0.256309 -1.11325 -0.274721 -0.961524Z" fill-rule="evenodd" transform="matrix(1 0 0 1 33 18)" fill="rgb(255, 255, 255)"/>
+				<path d="M0 -1C-0.55228 -1 -1 -0.55228 -1 0L-1 2C-1 2.55228 -0.55228 3 0 3C0.55228 3 1 2.55228 1 2L1 0C1 -0.55228 0.55228 -1 0 -1Z" fill-rule="evenodd" transform="matrix(1 0 0 1 29 19)" fill="rgb(255, 255, 255)"/>
+				<path d="M0 -1C-0.55228 -1 -1 -0.55228 -1 0L-1 2C-1 2.55228 -0.55228 3 0 3C0.55228 3 1 2.55228 1 2L1 0C1 -0.55228 0.55228 -1 0 -1Z" fill-rule="evenodd" transform="matrix(1 0 0 1 29 24)" fill="rgb(255, 255, 255)"/>
+				<path d="M0 -1C-0.55228 -1 -1 -0.55228 -1 0L-1 2C-1 2.55228 -0.55228 3 0 3C0.55228 3 1 2.55228 1 2L1 0C1 -0.55228 0.55228 -1 0 -1Z" fill-rule="evenodd" transform="matrix(1 0 0 1 29 29)" fill="rgb(255, 255, 255)"/>
+			</g>
+		</g>
+	</g>
+</svg>
