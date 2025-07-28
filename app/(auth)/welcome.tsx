@@ -1,8 +1,9 @@
+import FirstAnimation from "@/components/firstanimation";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useReducer } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 
-const Login = () => {
+const Welcome = () => {
   const [isToggled, toggle] = useReducer((s) => !s, false);
 
   return (
@@ -11,11 +12,12 @@ const Login = () => {
         colors={["#3B82F6", "#9333EA"]}
         style={styles.background}
       />
+      <FirstAnimation width={500} />
     </SafeAreaView>
   );
 };
 
-export default Login;
+export default Welcome;
 
 const styles = StyleSheet.create({
   container: {
