@@ -1,4 +1,3 @@
-import FirstAnimation from "@/components/firstanimation";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useReducer } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
@@ -12,7 +11,7 @@ const Welcome = () => {
         colors={["#3B82F6", "#9333EA"]}
         style={styles.background}
       />
-      <FirstAnimation width={500} />
+      {/* <FirstAnimation width={500} /> */}
     </SafeAreaView>
   );
 };
