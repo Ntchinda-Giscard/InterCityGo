@@ -15,7 +15,7 @@ const OnBoarding = () => {
   const handleNext = () => {
     if (currentIndex === onboardingSteps.length - 1) {
       setIsLastIndex(true);
-      router.replace("/(auth)/login");
+      router.replace("/(auth)/welcome");
     } else {
       swiperRef.current?.scrollBy(1);
     }
@@ -29,7 +29,7 @@ const OnBoarding = () => {
       {/* Top bar */}
       <View className="flex-row w-full justify-end px-4">
         <TouchableOpacity
-          onPress={() => router.replace("/(auth)/login")}
+          onPress={() => router.replace("/(auth)/welcome")}
           className="flex-row items-center"
         >
           <Text className="text-white text-md font-bold">Skip</Text>
