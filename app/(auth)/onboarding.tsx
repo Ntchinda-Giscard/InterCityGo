@@ -1,5 +1,6 @@
 import { onboardingSteps } from "@/constants/onboarding";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Image } from "expo-image";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -32,7 +33,7 @@ const OnBoarding = () => {
       >
         {onboardingSteps.map((step) => (
           <View key={step.id} className="justify-center items-center w-full">
-            {/* <Image source={step.image} contentFit="cover" /> */}
+            <Image source={step.image} contentFit="cover" />
             <Text className="text-white text-xl font-bold">{step.title}</Text>
             <Text className="text-white/80 text-md font-normal text-center">
               {step.description}

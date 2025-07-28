@@ -1,6 +1,6 @@
-import onboarding1 from "@/assets/constants/onboarding1.svg";
-import onboarding2 from "@/assets/constants/onboarding2.svg";
-import onboarding3 from "@/assets/constants/onboarding3.svg";
+import onboarding1 from "@/assets/images/onboading1.svg";
+import onboarding2 from "@/assets/images/onboarding2.svg";
+import onboarding3 from "@/assets/images/onboarding3.svg";
 
 export const onboardingImages = {
   onboarding1,
