@@ -34,10 +34,14 @@ const OnBoarding = () => {
         {onboardingSteps.map((step) => (
           <View key={step.id} className="justify-center items-center w-full">
             <Image source={step.image} className="w-full h-[300px]" />
-            <Text className="text-white text-xl font-bold">{step.title}</Text>
-            <Text className="text-white/80 text-md font-normal text-center">
-              {step.description}
-            </Text>
+            <View className="px-[32px] gap-[16px]">
+              <Text className="text-white text-2xl font-bold text-center">
+                {step.title}
+              </Text>
+              <Text className="text-white/80 text-md font-normal text-center">
+                {step.description}
+              </Text>
+            </View>
           </View>
         ))}
       </Swiper>
