@@ -21,7 +21,10 @@ const OnBoarding = () => {
     }
   };
   return (
-    <SafeAreaView className="flex-1 bg-gradient-to-b from-primary to-secondary">
+    <SafeAreaView
+      // className="flex-1 bg-gradient-to-b from-primary to-secondary"
+      className="flex-1 bg-gradient-to-b from-[#3B82F6] to-[#9333EA]"
+    >
       {/* Top bar */}
       <View className="flex-row w-full justify-end px-4">
         <TouchableOpacity
