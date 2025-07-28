@@ -1,3 +1,4 @@
+import AppButton from "@/components/app-button";
 import { onboardingSteps } from "@/constants/onboarding";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
@@ -45,6 +46,13 @@ const OnBoarding = () => {
           </View>
         ))}
       </Swiper>
+      <AppButton
+        title="Next"
+        onPress={() => {}}
+        iconRight={
+          <MaterialCommunityIcons name="arrow-right" color="#fff" size={18} />
+        }
+      />
     </SafeAreaView>
   );
 };
