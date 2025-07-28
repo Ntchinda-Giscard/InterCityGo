@@ -1,10 +1,10 @@
 import AppButton from "@/components/app-button";
 import { onboardingSteps } from "@/constants/onboarding";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
 
@@ -21,10 +21,11 @@ const OnBoarding = () => {
     }
   };
   return (
-    <SafeAreaView
-      // className="flex-1 bg-gradient-to-b from-primary to-secondary"
-      className="flex-1 bg-gradient-to-b from-[#3B82F6] to-[#9333EA]"
-    >
+    <SafeAreaView style={styles.container}>
+      <LinearGradient
+        colors={["#3B82F6", "#9333EA"]}
+        style={styles.background}
+      />
       {/* Top bar */}
       <View className="flex-row w-full justify-end px-4">
         <TouchableOpacity
@@ -49,7 +50,7 @@ const OnBoarding = () => {
       >
         {onboardingSteps.map((step) => (
           <View key={step.id} className="justify-center items-center w-full">
-            <Image source={step.image} className="w-full h-[300px]" />
+            <Image source={step.image} className="w-full h-[350px]" />
             <View className="px-[32px] gap-[16px]">
               <Text className="text-white text-2xl font-bold text-center">
                 {step.title}
@@ -65,7 +66,7 @@ const OnBoarding = () => {
         <AppButton
           variant="light"
           title={isLastIndex ? "Get Started" : "Next"}
-          className="w-1/3 my-6"
+          className="w-1/3 mb-[100px]"
           onPress={handleNext}
           iconRight={
             <MaterialCommunityIcons name="arrow-right" color="#fff" size={18} />
@@ -77,3 +78,20 @@ const OnBoarding = () => {
 };
 
 export default OnBoarding;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#9333EA",
+  },
+  background: {
+    flex: 1,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
+  },
+});
