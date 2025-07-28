@@ -1,8 +1,10 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { useReducer } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 
 const Login = () => {
+  const [isToggled, toggle] = useReducer((s) => !s, false);
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
