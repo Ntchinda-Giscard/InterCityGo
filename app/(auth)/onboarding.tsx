@@ -11,6 +11,15 @@ import Swiper from "react-native-swiper";
 const OnBoarding = () => {
   const swiperRef = useRef<Swiper>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLastIndex, setIsLastIndex] = useState(false);
+  const handleNext = () => {
+    if (currentIndex === onboardingSteps.length - 1) {
+      setIsLastIndex(true);
+      router.replace("/(auth)/login");
+    } else {
+      swiperRef.current?.scrollBy(1);
+    }
+  };
   return (
     <SafeAreaView className="flex-1 bg-gradient-to-b from-primary to-secondary">
       {/* Top bar */}
@@ -30,7 +39,10 @@ const OnBoarding = () => {
         loop={false}
         dot={<View className="bg-white/50 w-[8px] h-[8px] rounded-full" />}
         activeDot={<View className="bg-white w-[16px] h-[8px] rounded-full" />}
-        onIndexChanged={(index) => setCurrentIndex(index)}
+        onIndexChanged={(index) => {
+          setCurrentIndex(index);
+          setIsLastIndex(index === onboardingSteps.length - 1);
+        }}
       >
         {onboardingSteps.map((step) => (
           <View key={step.id} className="justify-center items-center w-full">
@@ -46,14 +58,17 @@ const OnBoarding = () => {
           </View>
         ))}
       </Swiper>
-      <AppButton
-        variant="light"
-        title="Next"
-        onPress={() => {}}
-        iconRight={
-          <MaterialCommunityIcons name="arrow-right" color="#fff" size={18} />
-        }
-      />
+      <View className="flex-row justify-center">
+        <AppButton
+          variant="light"
+          title={isLastIndex ? "Get Started" : "Next"}
+          className="w-1/3 my-6"
+          onPress={handleNext}
+          iconRight={
+            <MaterialCommunityIcons name="arrow-right" color="#fff" size={18} />
+          }
+        />
+      </View>
     </SafeAreaView>
   );
 };

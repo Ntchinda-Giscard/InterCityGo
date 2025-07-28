@@ -4,9 +4,9 @@ import { Text, TouchableOpacity } from "react-native";
 const getButtonVariant = (variant: string) => {
   switch (variant) {
     case "light":
-      return "bg-white";
-    case "secondary":
-      return "bg-secondary";
+      return "bg-white/20 border-white/30 border-[1px]";
+    case "default":
+      return "bg-primary";
     default:
       return "bg-primary";
   }
@@ -14,10 +14,10 @@ const getButtonVariant = (variant: string) => {
 
 const getTextColorVariant = (variant: string) => {
   switch (variant) {
-    case "primary":
-      return "text-primary";
-    case "secondary":
-      return "text-secondary";
+    case "light":
+      return "text-white";
+    case "default":
+      return "text-white";
     default:
       return "text-primary";
   }
@@ -34,10 +34,12 @@ const AppButton = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={` w-full flex-row rounded-full py-2 justify-center items-center ${getButtonVariant(variant)} ${getTextColorVariant(variant)} ${className}`}
+      className={`flex-row rounded-full py-2 justify-center items-center ${getButtonVariant(variant)} ${className}`}
     >
       {iconLeft && iconLeft}
-      <Text>{title}</Text>
+      <Text className={` text-sm ${getTextColorVariant(variant)}`}>
+        {title}
+      </Text>
       {iconRight && iconRight}
     </TouchableOpacity>
   );
