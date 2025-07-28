@@ -47,6 +47,7 @@ const OnBoarding = () => {
         ))}
       </Swiper>
       <AppButton
+        variant="light"
         title="Next"
         onPress={() => {}}
         iconRight={
