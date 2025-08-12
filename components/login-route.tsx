@@ -1,6 +1,6 @@
 import { images } from "@/constants/images";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   Image,
@@ -12,7 +12,6 @@ import {
 } from "react-native";
 
 const LoginRoute = () => {
-  const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: "",
     email_phone: "",

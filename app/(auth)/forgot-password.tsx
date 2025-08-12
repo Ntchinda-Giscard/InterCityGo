@@ -1,6 +1,7 @@
 import { images } from "@/constants/images";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   Image,
@@ -84,11 +85,14 @@ const ForgotPassword = () => {
                   We will send you an email with instructions to reset your
                   password.
                 </Text>
-                <TouchableOpacity className="flex-row items-center justify-center mt-4">
+                <TouchableOpacity
+                  onPress={() => router.back()}
+                  className="flex-row items-center gap-5 justify-center mt-4"
+                >
                   <MaterialCommunityIcons
                     name="arrow-left"
                     color="#fff"
-                    size={24}
+                    size={20}
                   />
                   <Text className="text-white/50 font-normal text-center mt-4 mb-4">
                     Back to Login

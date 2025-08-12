@@ -4,6 +4,7 @@ import { images } from "@/constants/images";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import {
+  Dimensions,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -14,6 +15,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+const screenHeight = Dimensions.get("window").height;
 
 const Welcome = () => {
   const [activeTab, setActiveTab] = useState("signup");
@@ -33,7 +35,7 @@ const Welcome = () => {
           contentContainerStyle={{ paddingBottom: 10 }}
           showsVerticalScrollIndicator={false}
         >
-          <View className=" w-full items-center justify-center pt-[20px] ">
+          <View className=" w-full flex-1 h-full items-center justify-center pt-[20px] ">
             <Image source={images.logo} className="w-[80px] h-[80px]" />
             <Text className="text-white text-2xl font-bold"> InterCityGo </Text>
             <Text className="text-white text-lg font-light mt-2">
@@ -89,8 +91,9 @@ export default Welcome;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "#9333EA",
+    minHeight: screenHeight,
   },
   background: {
     flex: 1,
