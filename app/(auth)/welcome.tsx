@@ -42,7 +42,7 @@ const Welcome = () => {
               Travel smart between cities
             </Text>
             <View className="w-full mt-6 px-4">
-              <View className="bg-white/20 rounded-[24px] w-full mt-4 px-3 py-4">
+              <View className="bg-white/20 rounded-[24px] w-full mt-4 py-4">
                 <View className="flex-row mb-8">
                   <TouchableOpacity
                     className={`flex-1 py-3 items-center ${

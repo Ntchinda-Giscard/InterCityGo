@@ -1,5 +1,6 @@
 import { images } from "@/constants/images";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   Image,
@@ -24,6 +25,7 @@ const SignupRoute = () => {
   return (
     <View className="px-4">
       <TextInput
+        cursorColor={"white"}
         className="bg-white/20 rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
         placeholder="Full Name"
         placeholderTextColor="rgba(255, 255, 255, 0.7)"
@@ -32,6 +34,7 @@ const SignupRoute = () => {
       />
 
       <TextInput
+        cursorColor={"white"}
         className="bg-white/20 rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
         placeholder="Phone Number / Email"
         placeholderTextColor="rgba(255, 255, 255, 0.7)"
@@ -41,6 +44,7 @@ const SignupRoute = () => {
         autoCapitalize="none"
       />
       <TextInput
+        cursorColor={"white"}
         className="bg-white/20 rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
         placeholder="Password"
         placeholderTextColor="rgba(255, 255, 255, 0.7)"
@@ -49,6 +53,7 @@ const SignupRoute = () => {
         secureTextEntry
       />
       <TextInput
+        cursorColor={"white"}
         className="bg-white/20 rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
         placeholder="Confirm Password"
         placeholderTextColor="rgba(255, 255, 255, 0.7)"
@@ -56,7 +61,7 @@ const SignupRoute = () => {
         onChangeText={(value) => handleInputChange("confirmPassword", value)}
         secureTextEntry
       />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => router.push("/otp-screen")}>
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
