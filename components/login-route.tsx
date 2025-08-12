@@ -1,5 +1,6 @@
 import { images } from "@/constants/images";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Image,
@@ -11,6 +12,7 @@ import {
 } from "react-native";
 
 const LoginRoute = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: "",
     email_phone: "",
@@ -40,7 +42,7 @@ const LoginRoute = () => {
         onChangeText={(value) => handleInputChange("password", value)}
         secureTextEntry
       />
-      <TouchableOpacity onPress={() => console.log("Forgot Password")}>
+      <TouchableOpacity onPress={() => router.push("/forgot-password")}>
         <Text className="text-white/50 font-normal text-right mb-4">
           {" "}
           Forgot Password?{" "}
