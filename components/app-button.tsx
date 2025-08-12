@@ -30,12 +30,14 @@ const AppButton = ({
   className,
   iconRight,
   iconLeft,
+  gradient,
 }: AppButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       className={`flex-row rounded-full py-2 justify-center items-center ${getButtonVariant(variant)} ${className}`}
     >
+      {gradient && gradient}
       {iconLeft && iconLeft}
       <Text className={` text-sm ${getTextColorVariant(variant)}`}>
         {title}

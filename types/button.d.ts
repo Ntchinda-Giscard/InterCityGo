@@ -5,4 +5,5 @@ interface AppButtonProps {
   className?: string;
   iconRight?: React.ReactNode;
   iconLeft?: React.ReactNode;
+  gradient?: React.ReactNode;
 }
