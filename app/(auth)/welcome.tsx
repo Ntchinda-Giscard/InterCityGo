@@ -1,10 +1,22 @@
+import LoginRoute from "@/components/login-route";
+import SignupRoute from "@/components/signup-route";
 import { images } from "@/constants/images";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useReducer } from "react";
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const Welcome = () => {
-  const [isToggled, toggle] = useReducer((s) => !s, false);
+  const [activeTab, setActiveTab] = useState("signup");
 
   return (
     <SafeAreaView style={styles.container}>
@@ -12,14 +24,63 @@ const Welcome = () => {
         colors={["#3B82F6", "#9333EA"]}
         style={styles.background}
       />
-      <View className=" w-full items-center justify-center pt-[20px] ">
-        <Image source={images.logo} className="w-[80px] h-[80px]" />
-        <Text className="text-white text-2xl font-bold"> InterCityGo </Text>
-        <Text className="text-white text-lg font-light mt-2">
-          Travel smart between cities
-        </Text>
-        <View className="bg-white/20 rounded-[24px] w-full mt-4 px-4 py-6"></View>
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"} // iOS lifts, Android shrinks
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={10} // adjust if you have a header
+      >
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 10 }}
+          showsVerticalScrollIndicator={false}
+        >
+          <View className=" w-full items-center justify-center pt-[20px] ">
+            <Image source={images.logo} className="w-[80px] h-[80px]" />
+            <Text className="text-white text-2xl font-bold"> InterCityGo </Text>
+            <Text className="text-white text-lg font-light mt-2">
+              Travel smart between cities
+            </Text>
+            <View className="w-full mt-6 px-4">
+              <View className="bg-white/20 rounded-[24px] w-full mt-4 px-3 py-4">
+                <View className="flex-row mb-8">
+                  <TouchableOpacity
+                    className={`flex-1 py-3 items-center ${
+                      activeTab === "signup" ? "border-b-2 border-white" : ""
+                    }`}
+                    onPress={() => setActiveTab("signup")}
+                  >
+                    <Text
+                      className={`text-base ${
+                        activeTab === "signup"
+                          ? "text-white font-semibold"
+                          : "text-white/70"
+                      }`}
+                    >
+                      Sign Up
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    className={`flex-1 py-3 items-center ${
+                      activeTab === "login" ? "border-b-2 border-white" : ""
+                    }`}
+                    onPress={() => setActiveTab("login")}
+                  >
+                    <Text
+                      className={`text-base ${
+                        activeTab === "login"
+                          ? "text-white font-semibold"
+                          : "text-white/70"
+                      }`}
+                    >
+                      Log In
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                {activeTab === "signup" ? <SignupRoute /> : <LoginRoute />}
+              </View>
+            </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
