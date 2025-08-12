@@ -1,35 +1,18 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withTiming,
-} from "react-native-reanimated";
+import React from 'react';
+import { Button, StyleSheet, View } from 'react-native';
+import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 
-interface FirstAnimationProps {
-  width: number;
-}
+export default function FirstAnimation() {
+  const width = useSharedValue<number>(100);
 
-export default function FirstAnimation({ width }: FirstAnimationProps) {
-  const offset = useSharedValue(width / 2 - 160);
-
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{ translateX: offset.value }],
-  }));
-
-  React.useEffect(() => {
-    offset.value = withRepeat(
-      // highlight-next-line
-      withTiming(-offset.value, { duration: 1750 }),
-      -1,
-      true
-    );
-  }, []);
+  const handlePress = () => {
+    width.value = withSpring(width.value + 50);
+  };
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.box, animatedStyles]} />
+      <Animated.View style={{ ...styles.box, width }} />
+      <Button onPress={handlePress} title="Click me" />
     </View>
   );
 }
@@ -37,14 +20,12 @@ export default function FirstAnimation({ width }: FirstAnimationProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
+    alignItems: 'center',
   },
   box: {
-    height: 120,
-    width: 120,
-    backgroundColor: "#b58df1",
+    height: 100,
+    backgroundColor: '#b58df1',
     borderRadius: 20,
+    marginVertical: 64,
   },
 });

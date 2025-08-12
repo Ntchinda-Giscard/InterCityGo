@@ -5,18 +5,23 @@ import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useSharedValue } from 'react-native-reanimated';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
 
 const OnBoarding = () => {
+  const activePaginationWidth = useSharedValue<number>(16);
+  const inactivePaginationWidth = useSharedValue<number>(8);
   const swiperRef = useRef<Swiper>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLastIndex, setIsLastIndex] = useState(false);
+
   const handleNext = () => {
     if (currentIndex === onboardingSteps.length - 1) {
       setIsLastIndex(true);
       router.replace("/(auth)/welcome");
     } else {
+      console.log("On boarding next step", (onboardingSteps.length - 1));
       swiperRef.current?.scrollBy(1);
     }
   };
@@ -41,9 +46,11 @@ const OnBoarding = () => {
       <Swiper
         ref={swiperRef}
         loop={false}
-        dot={<View className="bg-white/50 w-[8px] h-[8px] rounded-full" />}
-        activeDot={<View className="bg-white w-[16px] h-[8px] rounded-full" />}
+        showsPagination={true}
+        dot={<View style={{ width: 8, height: 8 }} className={"bg-white/50 rounded-full mx-1 my-4"} />}
+        activeDot={<View style={{ width: 16, height: 8 }} className={"bg-white rounded-full mx-1 my-4"} />}
         onIndexChanged={(index) => {
+          console.log("Current index:", index);
           setCurrentIndex(index);
           setIsLastIndex(index === onboardingSteps.length - 1);
         }}
@@ -62,6 +69,7 @@ const OnBoarding = () => {
           </View>
         ))}
       </Swiper>
+      
       <View className="flex-row justify-center">
         <AppButton
           variant="light"

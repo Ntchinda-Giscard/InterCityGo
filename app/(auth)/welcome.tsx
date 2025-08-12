@@ -11,7 +11,6 @@ const Welcome = () => {
         colors={["#3B82F6", "#9333EA"]}
         style={styles.background}
       />
-      {/* <FirstAnimation width={500} /> */}
     </SafeAreaView>
   );
 };
