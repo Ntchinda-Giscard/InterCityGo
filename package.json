@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@clerk/clerk-expo": "^2.14.17",
     "@expo/vector-icons": "^14.1.0",
     "@react-native-vector-icons/evil-icons": "^12.2.0",
     "@react-native-vector-icons/fontawesome6": "^12.1.0",
