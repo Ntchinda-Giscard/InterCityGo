@@ -13,17 +13,10 @@ const OAuth = () => {
     <View className="flex-row items-center justify-center mt-4">
       <TouchableOpacity
         onPress={handleGoogleSignIn}
-        className="flex-row items-center bg-white/30 rounded-full px-4 py-2"
+        className="flex-row items-center  justify-center w-full bg-white/30 rounded-xl px-6 py-4"
       >
-        <Image source={images.google} className="w-6 h-6 mr-2" />
-        <Text className="text-white text-base font-normal">Google</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={handleFacebookSignIn}
-        className="flex-row items-center bg-white/30 rounded-full px-4 py-2 ml-4"
-      >
-        <Image source={images.facebook} className="w-6 h-6 mr-2" />
-        <Text className="text-white text-base font-normal">Facebook</Text>
+        <Image source={images.google} className="w-7 h-7 mr-2" />
+        <Text className="text-white text-xl font-semibold">Google</Text>
       </TouchableOpacity>
     </View>
   );

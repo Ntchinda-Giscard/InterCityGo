@@ -8,7 +8,10 @@ export default function AuthtLayout() {
       <Stack.Screen name="welcome" options={{ headerShown: false }} />
       <Stack.Screen name="onboarding" options={{ headerShown: false }} />
       <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
-      <Stack.Screen name="otp-screen" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="otp-screen"
+        options={{ headerShown: false, presentation: "modal" }}
+      />
     </Stack>
   );
 }

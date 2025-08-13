@@ -1,9 +1,11 @@
 import { images } from "@/constants/images";
+import { useSignUp } from "@clerk/clerk-expo";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -17,14 +19,71 @@ import { OtpInput } from "react-native-otp-entry";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const OTPScreen = () => {
+  const OTP_EXPIRY_SECONDS = 180; // 3 minutes
+  const [countdown, setCountdown] = useState(OTP_EXPIRY_SECONDS);
+
+  useEffect(() => {
+    if (countdown <= 0) return; // stop when it hits zero
+
+    const timer = setInterval(() => {
+      setCountdown((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [countdown]);
+
+  const minutes = Math.floor(countdown / 60);
+  const seconds = countdown % 60;
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
-    email_phone: "",
+    otp: "",
   });
+  const [verificationCode, setVerificationCode] = useState({
+    state: "default", // default, loading, error
+    error: "",
+    code: "",
+  });
+  const [pendingVerification, setPendingVerification] = useState(false);
+  const { isLoaded, signUp, setActive } = useSignUp();
+
+  const [code, setCode] = useState("");
+
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }));
+  };
+
+  const onVerifyPress = async () => {
+    if (!isLoaded) return;
+
+    try {
+      // Use the code the user provided to attempt verification
+      setIsLoading(true);
+      const signUpAttempt = await signUp.attemptEmailAddressVerification({
+        code: formData.otp,
+      });
+
+      // If verification was completed, set the session to active
+      // and redirect the user
+      if (signUpAttempt.status === "complete") {
+        await setActive({ session: signUpAttempt.createdSessionId });
+        setIsLoading(false);
+        router.replace("/(tabs)/home");
+      } else {
+        // If the status is not complete, check why. User may need to
+        // complete further steps.
+        console.error(JSON.stringify(signUpAttempt, null, 2));
+      }
+    } catch (err) {
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
+      setIsLoading(false);
+      console.error(JSON.stringify(err, null, 2));
+    }
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -58,7 +117,8 @@ const OTPScreen = () => {
                 </Text>
                 <View className="mt-6" />
                 <OtpInput
-                  numberOfDigits={5}
+                  onTextChange={(value) => handleInputChange("otp", value)}
+                  numberOfDigits={6}
                   focusColor="white"
                   theme={{
                     pinCodeContainerStyle: {
@@ -66,32 +126,40 @@ const OTPScreen = () => {
                       borderRadius: 12,
                       padding: 10,
                       borderBlockColor: "rgba(255, 255, 255, 0.5)",
-                      width: 64,
-                      height: 64,
+                      width: 50,
+                      height: 50,
                     },
                     pinCodeTextStyle: {
                       color: "white",
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: "bold",
                     },
                   }}
                 />
 
                 <Text className="text-white text-md py-6 font-light mt-2 text-center">
-                  Code expires in: 02:59
+                  Code expires in:{" "}
+                  {`${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`}
                 </Text>
 
-                <TouchableOpacity className="mt-4">
+                <TouchableOpacity
+                  className="mt-4"
+                  onPress={onVerifyPress}
+                  disabled={countdown <= 0}
+                >
                   <LinearGradient
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     style={styles.gradient}
                     colors={["#3B82F6", "#4F46E5"]}
                   >
-                    <Text className="text-white text-base font-semibold">
-                      {" "}
-                      Verify Code{" "}
-                    </Text>
+                    {!isLoading && (
+                      <Text className="text-white text-base font-semibold">
+                        {" "}
+                        Sign up{" "}
+                      </Text>
+                    )}
+                    {isLoading && <ActivityIndicator color="white" />}
                   </LinearGradient>
                 </TouchableOpacity>
 
