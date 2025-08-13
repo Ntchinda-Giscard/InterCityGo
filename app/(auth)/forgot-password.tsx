@@ -38,17 +38,17 @@ const ForgotPassword = () => {
         keyboardVerticalOffset={10} // adjust if you have a header
       >
         <ScrollView
-          contentContainerStyle={{ paddingBottom: 10 }}
+          contentContainerStyle={{ paddingBottom: 10, flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
         >
-          <View className=" w-full items-center justify-center pt-[20px] ">
+          <View className=" flex-1  items-center justify-center pt-[20px] ">
             <Image source={images.logo} className="w-[80px] h-[80px]" />
             <Text className="text-white text-2xl font-bold"> InterCityGo </Text>
             <Text className="text-white text-lg font-light mt-2">
               Travel smart between cities
             </Text>
-            <View className="w-full mt-6 px-4">
-              <View className="bg-white/20 h-full rounded-[24px] w-full mt-4 px-3 py-4">
+            <View className="flex-1 mt-6 px-4">
+              <View className="bg-white/20 flex-1 rounded-[24px]  mt-4 px-3 py-4">
                 <Text className="text-white text-xl font-bold text-center">
                   {" "}
                   Forgot Password{" "}

@@ -38,17 +38,17 @@ const OTPScreen = () => {
         keyboardVerticalOffset={10} // adjust if you have a header
       >
         <ScrollView
-          contentContainerStyle={{ paddingBottom: 10 }}
+          contentContainerStyle={{ paddingBottom: 10, flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
         >
-          <View className=" w-full items-center justify-center pt-[20px] ">
+          <View className=" flex-1 px-4 items-center justify-center pt-[20px] ">
             <Image source={images.logo} className="w-[80px] h-[80px]" />
             <Text className="text-white text-2xl font-bold"> InterCityGo </Text>
             <Text className="text-white text-lg font-light mt-2">
               Travel smart between cities
             </Text>
-            <View className="w-full mt-6 px-4">
-              <View className="bg-white/20 rounded-[24px] w-full mt-4 px-4 py-4">
+            <View className="flex-1 mt-6">
+              <View className="bg-white/20 rounded-[24px] flex-1 mt-4 px-4 py-4">
                 <Text className="text-white text-xl font-bold text-center">
                   {" "}
                   Enter Verification Code{" "}
@@ -77,6 +77,10 @@ const OTPScreen = () => {
                   }}
                 />
 
+                <Text className="text-white text-md py-6 font-light mt-2 text-center">
+                  Code expires in: 02:59
+                </Text>
+
                 <TouchableOpacity className="mt-4">
                   <LinearGradient
                     start={{ x: 0, y: 0 }}
@@ -90,9 +94,7 @@ const OTPScreen = () => {
                     </Text>
                   </LinearGradient>
                 </TouchableOpacity>
-                <Text className="text-white text-md font-light mt-2 text-center">
-                  Code expires in: 02:59
-                </Text>
+
                 <TouchableOpacity
                   onPress={() => {}}
                   className="flex-row items-center p-5 gap-2 justify-center mt-4"

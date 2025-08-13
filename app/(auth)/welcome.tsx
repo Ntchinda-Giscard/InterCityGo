@@ -27,23 +27,24 @@ const Welcome = () => {
         style={styles.background}
       />
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"} // iOS lifts, Android shrinks
+        className="flex-1"
         style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"} // iOS lifts, Android shrinks
         keyboardVerticalOffset={10} // adjust if you have a header
       >
         <ScrollView
-          contentContainerStyle={{ paddingBottom: 10 }}
+          contentContainerStyle={{ paddingBottom: 10, flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
         >
-          <View className=" w-full flex-1 h-full items-center justify-center pt-[20px] ">
+          <View className="  flex-1  items-center justify-center pt-[20px] px-4 ">
             <Image source={images.logo} className="w-[80px] h-[80px]" />
             <Text className="text-white text-2xl font-bold"> InterCityGo </Text>
             <Text className="text-white text-lg font-light mt-2">
               Travel smart between cities
             </Text>
-            <View className="w-full mt-6 px-4">
-              <View className="bg-white/20 rounded-[24px] w-full mt-4 py-4">
-                <View className="flex-row mb-8">
+            <View className="flex-1 w-full mt-6">
+              <View className="bg-white/20 flex-1 rounded-[24px] mt-4 py-4">
+                <View className="flex-row mb-8 px-4">
                   <TouchableOpacity
                     className={`flex-1 py-3 items-center ${
                       activeTab === "signup" ? "border-b-2 border-white" : ""
@@ -91,7 +92,7 @@ export default Welcome;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: "#9333EA",
     minHeight: screenHeight,
   },
