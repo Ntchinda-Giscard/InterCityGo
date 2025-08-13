@@ -1,15 +1,14 @@
-import { images } from "@/constants/images";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
-  Image,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import OAuth from "./oauth";
 
 const SignupRoute = () => {
   const [formData, setFormData] = useState({
@@ -76,7 +75,8 @@ const SignupRoute = () => {
         <Text className="text-white/50 font-normal">or continue with</Text>
         <View className="h-[1px] bg-white/50 rounded-full flex-1 mx-1" />
       </View>
-      <View className="flex-row items-center justify-center mt-4">
+      <OAuth />
+      {/* <View className="flex-row items-center justify-center mt-4">
         <TouchableOpacity className="flex-row items-center bg-white/30 rounded-full px-4 py-2">
           <Image source={images.google} className="w-6 h-6 mr-2" />
           <Text className="text-white text-base font-normal">Google</Text>
@@ -85,7 +85,7 @@ const SignupRoute = () => {
           <Image source={images.facebook} className="w-6 h-6 mr-2" />
           <Text className="text-white text-base font-normal">Facebook</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };
