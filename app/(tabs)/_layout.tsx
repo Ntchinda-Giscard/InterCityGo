@@ -21,6 +21,15 @@ const LayOut = () => {
         }}
       />
       <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="search" color="#000" size={28} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="rides"
         options={{
           title: "Rides",

@@ -21,7 +21,7 @@ export default function CustomTabBar({
       case "search":
         return "search";
       case "profile":
-        return "person";
+        return "person-circle-outline";
       default:
         return "chatbubble-ellipses";
     }
@@ -77,7 +77,7 @@ export default function CustomTabBar({
           >
             <Ionicons
               name={getIconsByRouteName(route.name)}
-              size={20}
+              size={isFocused ? 22 : 20}
               color={isFocused ? "white" : "rgba(255,255,255,0.4)"}
             />
             {isFocused && (
@@ -104,7 +104,12 @@ const styles = StyleSheet.create({
     width: "80%",
     bottom: 70,
     borderRadius: 30,
-    padding: 5,
+    padding: 10,
+
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
   },
   tabBarButton: {
     flexDirection: "row",
@@ -113,5 +118,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderRadius: 30,
+    gap: 8,
   },
 });
