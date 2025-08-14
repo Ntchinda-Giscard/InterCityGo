@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { PlatformPressable, Text } from "@react-navigation/elements";
 import { useLinkBuilder, useTheme } from "@react-navigation/native";
@@ -16,6 +17,8 @@ export default function CustomTabBar({
       case "home":
         return "home";
       case "rides":
+        return "car";
+      case "search":
         return "search";
       case "profile":
         return "person";
@@ -65,11 +68,25 @@ export default function CustomTabBar({
             testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={styles.tabBarButton}
+            style={{
+              ...styles.tabBarButton,
+              backgroundColor: isFocused
+                ? "rgba(255,255,255,0.4)"
+                : "transparent",
+            }}
           >
-            <Text style={{ color: isFocused ? colors.primary : colors.text }}>
-              {label as string}
-            </Text>
+            <Ionicons
+              name={getIconsByRouteName(route.name)}
+              size={20}
+              color={isFocused ? "white" : "rgba(255,255,255,0.4)"}
+            />
+            {isFocused && (
+              <Text
+                style={{ color: isFocused ? "white" : "rgba(255,255,255,0.4)" }}
+              >
+                {label as string}
+              </Text>
+            )}
           </PlatformPressable>
         );
       })}
@@ -84,15 +101,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     position: "absolute",
-    width: "90%",
+    width: "80%",
     bottom: 70,
-    borderRadius: 20,
-    padding: 10,
+    borderRadius: 30,
+    padding: 5,
   },
   tabBarButton: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 30,
   },
 });
