@@ -1,8 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { PlatformPressable, Text } from "@react-navigation/elements";
+import { PlatformPressable } from "@react-navigation/elements";
 import { useLinkBuilder, useTheme } from "@react-navigation/native";
+import { MotiView } from "moti";
 import { StyleSheet, View } from "react-native";
+import Animated, { FadeIn, LinearTransition } from "react-native-reanimated";
+
+const AnimatedComponent = Animated.createAnimatedComponent(PlatformPressable);
 
 export default function CustomTabBar({
   state,
@@ -60,34 +64,40 @@ export default function CustomTabBar({
         };
 
         return (
-          <PlatformPressable
-            key={route.key}
-            href={buildHref(route.name, route.params)}
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarButtonTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{
-              ...styles.tabBarButton,
-              backgroundColor: isFocused
-                ? "rgba(255,255,255,0.4)"
-                : "transparent",
-            }}
-          >
-            <Ionicons
-              name={getIconsByRouteName(route.name)}
-              size={isFocused ? 22 : 20}
-              color={isFocused ? "white" : "rgba(255,255,255,0.4)"}
-            />
-            {isFocused && (
-              <Text
-                style={{ color: isFocused ? "white" : "rgba(255,255,255,0.4)" }}
-              >
-                {label as string}
-              </Text>
-            )}
-          </PlatformPressable>
+          <MotiView>
+            <AnimatedComponent
+              layout={LinearTransition.springify().damping(80).stiffness(200)}
+              key={route.key}
+              href={buildHref(route.name, route.params)}
+              accessibilityState={isFocused ? { selected: true } : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              testID={options.tabBarButtonTestID}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              style={{
+                ...styles.tabBarButton,
+                backgroundColor: isFocused
+                  ? "rgba(255,255,255,0.4)"
+                  : "transparent",
+              }}
+            >
+              <Ionicons
+                name={getIconsByRouteName(route.name)}
+                size={isFocused ? 22 : 20}
+                color={isFocused ? "white" : "rgba(255,255,255,0.4)"}
+              />
+              {isFocused && (
+                <Animated.Text
+                  entering={FadeIn.springify()}
+                  style={{
+                    color: isFocused ? "white" : "rgba(255,255,255,0.4)",
+                  }}
+                >
+                  {label as string}
+                </Animated.Text>
+              )}
+            </AnimatedComponent>
+          </MotiView>
         );
       })}
     </View>

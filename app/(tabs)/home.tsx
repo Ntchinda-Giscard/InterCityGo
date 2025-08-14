@@ -1,7 +1,6 @@
 import { useClerk } from "@clerk/clerk-expo";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Linking from "expo-linking";
-import { router } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,7 +12,7 @@ const Home = () => {
       await signOut();
       // Redirect to your desired page
       Linking.openURL(Linking.createURL("/"));
-      router.replace("/(auth)/welcome");
+      // router.replace("/(auth)/welcome");
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
