@@ -1,7 +1,10 @@
+import { useSignIn } from "@clerk/clerk-expo";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -18,8 +21,43 @@ const LoginRoute = () => {
     confirmPassword: "",
   });
 
+  const { signIn, setActive, isLoaded } = useSignIn();
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleInputChange = (field: string, value: string) => {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
+  };
+
+  const onSignInPress = async () => {
+    if (!isLoaded) return;
+
+    // Start the sign-in process using the email and password provided
+    try {
+      setIsLoading(true);
+      const signInAttempt = await signIn.create({
+        identifier: formData.email_phone.trim(),
+        password: formData.password,
+      });
+
+      // If sign-in process is complete, set the created session as active
+      // and redirect the user
+      if (signInAttempt.status === "complete") {
+        await setActive({ session: signInAttempt.createdSessionId });
+        setIsLoading(false);
+        router.replace("/(tabs)/home");
+      } else {
+        // If the status isn't complete, check why. User might need to
+        // complete further steps.
+        setIsLoading(false);
+        console.error(JSON.stringify(signInAttempt, null, 2));
+      }
+    } catch (err: any) {
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
+      setIsLoading(false);
+      Alert.alert("Error", err?.errors?.[0].longMessage || "An error occurred");
+      console.error(JSON.stringify(err, null, 2));
+    }
   };
   return (
     <View className="px-4">
@@ -47,14 +85,17 @@ const LoginRoute = () => {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onSignInPress}>
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.gradient}
           colors={["#3B82F6", "#4F46E5"]}
         >
-          <Text className="text-white text-base font-semibold"> Login </Text>
+          {!isLoading && (
+            <Text className="text-white text-base font-semibold"> Login </Text>
+          )}
+          {isLoading && <ActivityIndicator color="white" />}
         </LinearGradient>
       </TouchableOpacity>
       <View className="flex-row items-center w-full mt-5 gap-4">

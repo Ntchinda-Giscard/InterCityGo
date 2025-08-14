@@ -1,4 +1,4 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
 
@@ -22,16 +22,7 @@ const LayOut = () => {
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={28} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="chat"
-        options={{
-          title: "Chat",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={28} />
+            <Ionicons name="home" color="#000" size={28} />
           ),
         }}
       />
@@ -40,11 +31,16 @@ const LayOut = () => {
         options={{
           title: "Rides",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="chat-processing"
-              color={color}
-              size={28}
-            />
+            <Ionicons name="search" color="#000" size={28} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="chat"
+        options={{
+          title: "Chat",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="chatbox-ellipses" color="#000" size={28} />
           ),
         }}
       />
@@ -53,7 +49,7 @@ const LayOut = () => {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={28} />
+            <Ionicons name="person-sharp" color="#000" size={28} />
           ),
         }}
       />

@@ -68,9 +68,9 @@ const ResetPassword = () => {
       .then((result) => {
         if (result.status === "complete") {
           // Set the active session
-          setActive({ session: result.createdSessionId });
+          //   setActive({ session: result.createdSessionId });
           setIsLoading(false);
-          router.push("/(auth)/welcome");
+          router.replace("/(tabs)/home");
           setError("");
         }
       })
@@ -161,7 +161,7 @@ const ResetPassword = () => {
                     {!isLoading && (
                       <Text className="text-white text-base font-semibold">
                         {" "}
-                        Sign up{" "}
+                        Reset password{" "}
                       </Text>
                     )}
                     {isLoading && <ActivityIndicator color="white" />}

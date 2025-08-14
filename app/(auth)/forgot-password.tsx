@@ -5,6 +5,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -19,12 +21,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const ForgotPassword = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
+  const [isLoading, setIsLoading] = useState(false);
+
   const [successfulCreation, setSuccessfulCreation] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     email_phone: "",
   });
   const resetPassword = async () => {
+    setIsLoading(true);
     await signIn
       ?.create({
         strategy: "reset_password_email_code",
@@ -32,12 +37,18 @@ const ForgotPassword = () => {
       })
       .then((_) => {
         setSuccessfulCreation(true);
+        setIsLoading(false);
         router.push("/(auth)/reset-password");
         setError("");
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.error("error", err.errors[0].longMessage);
+        setIsLoading(false);
         setError(err.errors[0].longMessage);
+        Alert.alert(
+          "Error",
+          err?.errors?.[0].longMessage || "An error occurred"
+        );
       });
   };
   const handleInputChange = (field: string, value: string) => {
@@ -95,10 +106,13 @@ const ForgotPassword = () => {
                     style={styles.gradient}
                     colors={["#3B82F6", "#4F46E5"]}
                   >
-                    <Text className="text-white text-base font-semibold">
-                      {" "}
-                      Reset{" "}
-                    </Text>
+                    {!isLoading && (
+                      <Text className="text-white text-base font-semibold">
+                        {" "}
+                        Send Reset Code{" "}
+                      </Text>
+                    )}
+                    {isLoading && <ActivityIndicator color="white" />}
                   </LinearGradient>
                 </TouchableOpacity>
                 <Text className="text-white/50 font-normal text-center mt-4 mb-4">

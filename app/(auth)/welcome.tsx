@@ -18,7 +18,7 @@ import {
 const screenHeight = Dimensions.get("window").height;
 
 const Welcome = () => {
-  const [activeTab, setActiveTab] = useState("signup");
+  const [activeTab, setActiveTab] = useState("login");
 
   return (
     <SafeAreaView style={styles.container}>
