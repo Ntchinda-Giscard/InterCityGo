@@ -37,13 +37,12 @@ const SignupRoute = () => {
     // Start sign-up process using email and password provided
     try {
       setIsLoading(true);
-      await signUp.create({
+      const result = await signUp.create({
         emailAddress: formData.email_phone.trim(),
         password: formData.password.trim(),
         firstName: formData.firstName.trim(),
         lastName: formData.lastName.trim(),
       });
-
       //
 
       // Send user an email with verification code

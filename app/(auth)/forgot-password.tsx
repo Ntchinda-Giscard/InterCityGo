@@ -1,4 +1,5 @@
 import { images } from "@/constants/images";
+import { useSignIn } from "@clerk/clerk-expo";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
@@ -17,9 +18,28 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ForgotPassword = () => {
+  const { signIn, setActive, isLoaded } = useSignIn();
+  const [successfulCreation, setSuccessfulCreation] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     email_phone: "",
   });
+  const resetPassword = async () => {
+    await signIn
+      ?.create({
+        strategy: "reset_password_email_code",
+        identifier: formData.email_phone,
+      })
+      .then((_) => {
+        setSuccessfulCreation(true);
+        router.push("/(auth)/reset-password");
+        setError("");
+      })
+      .catch((err) => {
+        console.error("error", err.errors[0].longMessage);
+        setError(err.errors[0].longMessage);
+      });
+  };
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
@@ -58,7 +78,7 @@ const ForgotPassword = () => {
                 </Text>
                 <TextInput
                   className="bg-white/20 rounded-xl px-4 py-4 mb-4 mt-6 text-base text-white w-full min-h-[56px]"
-                  placeholder="Phone Number / Email"
+                  placeholder="Email"
                   placeholderTextColor="rgba(255, 255, 255, 0.7)"
                   value={formData.email_phone}
                   onChangeText={(value) =>
@@ -68,7 +88,7 @@ const ForgotPassword = () => {
                   autoCapitalize="none"
                 />
 
-                <TouchableOpacity className="mt-4">
+                <TouchableOpacity className="mt-4" onPress={resetPassword}>
                   <LinearGradient
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
@@ -77,7 +97,7 @@ const ForgotPassword = () => {
                   >
                     <Text className="text-white text-base font-semibold">
                       {" "}
-                      Send Reset Link{" "}
+                      Reset{" "}
                     </Text>
                   </LinearGradient>
                 </TouchableOpacity>
