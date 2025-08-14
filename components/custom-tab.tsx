@@ -1,9 +1,9 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { PlatformPressable, Text } from "@react-navigation/elements";
 import { useLinkBuilder, useTheme } from "@react-navigation/native";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-export default function MyTabBar({
+export default function CustomTabBar({
   state,
   descriptors,
   navigation,
@@ -11,8 +11,21 @@ export default function MyTabBar({
   const { colors } = useTheme();
   const { buildHref } = useLinkBuilder();
 
+  const getIconsByRouteName = (routeName: string) => {
+    switch (routeName) {
+      case "home":
+        return "home";
+      case "rides":
+        return "search";
+      case "profile":
+        return "person";
+      default:
+        return "chatbubble-ellipses";
+    }
+  };
+
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View style={styles.tabBar}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -45,13 +58,14 @@ export default function MyTabBar({
 
         return (
           <PlatformPressable
+            key={route.key}
             href={buildHref(route.name, route.params)}
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1 }}
+            style={styles.tabBarButton}
           >
             <Text style={{ color: isFocused ? colors.primary : colors.text }}>
               {label as string}
@@ -62,3 +76,23 @@ export default function MyTabBar({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    flexDirection: "row",
+    backgroundColor: "rgba(255,255,255,0.2)",
+    alignSelf: "center",
+    justifyContent: "center",
+    position: "absolute",
+    width: "90%",
+    bottom: 70,
+    borderRadius: 20,
+    padding: 10,
+  },
+  tabBarButton: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

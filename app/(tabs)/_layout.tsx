@@ -1,3 +1,4 @@
+import CustomTabBar from "@/components/custom-tab";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
@@ -8,6 +9,7 @@ const LayOut = () => {
       screenOptions={{
         headerShown: false,
       }}
+      tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tabs.Screen
         name="home"
