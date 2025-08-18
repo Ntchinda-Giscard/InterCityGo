@@ -1,24 +1,9 @@
-import { useClerk } from "@clerk/clerk-expo";
 import { LinearGradient } from "expo-linear-gradient";
-import * as Linking from "expo-linking";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
-  const { signOut } = useClerk();
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-      // Redirect to your desired page
-      Linking.openURL(Linking.createURL("/"));
-      // router.replace("/(auth)/welcome");
-    } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      console.error(JSON.stringify(err, null, 2));
-    }
-  };
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -26,14 +11,7 @@ const Home = () => {
         style={styles.background}
       />
 
-      <View className="flex-1 justify-center items-center">
-        <TouchableOpacity
-          onPress={handleSignOut}
-          className="bg-white/20 rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
-        >
-          <Text>Home</Text>
-        </TouchableOpacity>
-      </View>
+      <View className="flex-1 justify-center items-center"></View>
     </SafeAreaView>
   );
 };

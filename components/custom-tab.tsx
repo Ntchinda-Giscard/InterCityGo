@@ -64,9 +64,9 @@ export default function CustomTabBar({
         };
 
         return (
-          <MotiView>
+          <MotiView key={route.key}>
             <AnimatedComponent
-              layout={LinearTransition.springify().damping(80).stiffness(200)}
+              layout={LinearTransition.springify().damping(12).stiffness(20)}
               key={route.key}
               href={buildHref(route.name, route.params)}
               accessibilityState={isFocused ? { selected: true } : {}}
@@ -83,7 +83,7 @@ export default function CustomTabBar({
             >
               <Ionicons
                 name={getIconsByRouteName(route.name)}
-                size={isFocused ? 22 : 20}
+                size={isFocused ? 24 : 22}
                 color={isFocused ? "white" : "rgba(255,255,255,0.4)"}
               />
               {isFocused && (
@@ -91,6 +91,7 @@ export default function CustomTabBar({
                   entering={FadeIn.springify()}
                   style={{
                     color: isFocused ? "white" : "rgba(255,255,255,0.4)",
+                    fontWeight: isFocused ? "bold" : "normal",
                   }}
                 >
                   {label as string}
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
     width: "80%",
-    bottom: 70,
+    bottom: 30,
     borderRadius: 30,
     padding: 10,
 

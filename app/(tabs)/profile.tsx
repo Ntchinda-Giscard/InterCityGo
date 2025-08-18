@@ -3,7 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as Linking from "expo-linking";
 import { router } from "expo-router";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Profile = () => {
@@ -26,6 +26,12 @@ const Profile = () => {
         colors={["#3B82F6", "#9333EA"]}
         style={styles.background}
       />
+      <TouchableOpacity
+        onPress={handleSignOut}
+        className="bg-white/20 rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
+      >
+        <Text>Profile</Text>
+      </TouchableOpacity>
 
       <Text>Profile</Text>
     </SafeAreaView>
