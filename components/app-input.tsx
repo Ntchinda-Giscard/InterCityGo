@@ -11,7 +11,7 @@ const AppInput = (props: TextInpuProps) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"} // iOS lifts, Android shrinks
-      keyboardVerticalOffset={10}
+      keyboardVerticalOffset={10} // adjust if you have a header
     >
       <TouchableWithoutFeedback>
         <View className={props.className}>
