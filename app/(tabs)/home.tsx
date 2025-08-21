@@ -1,5 +1,6 @@
 import AppInput from "@/components/app-input";
 import RideCard from "@/components/RideCard";
+import { useAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
@@ -9,6 +10,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const screenHeight = Dimensions.get("window").height;
 
 const Home = () => {
+  const { isLoaded, isSignedIn, actor, getToken } = useAuth();
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -16,7 +19,7 @@ const Home = () => {
         style={styles.background}
       />
 
-      <Text className="text-bold text-white text-3xl"> Welcome {} </Text>
+      <Text className="text-bold text-white text-3xl"> Welcome 👋 {} </Text>
       <AppInput
         iconLeft={
           <Ionicons name="search" color="#C084FC" size={20} className="m-2" />
