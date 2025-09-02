@@ -25,7 +25,7 @@ const OnBoarding = () => {
     }
   };
 
-  const _background = ["#3B82F6", "#9333EA"];
+  const _background = ["#3B82F6", "#9333EA", "#a855f7"];
   return (
     <SafeAreaView style={styles.container}>
       {/* Top bar */}
