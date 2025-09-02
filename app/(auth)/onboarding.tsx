@@ -1,6 +1,6 @@
 import { onboardingSteps } from "@/constants/onboarding";
 import React, { useRef } from "react";
-import { Dimensions, Image, StyleSheet, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import Animated, { useSharedValue } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
@@ -17,27 +17,42 @@ const OnBoarding = () => {
     <SafeAreaView style={styles.container}>
       {/* Flatlist */}
       <Animated.FlatList
+        contentContainerStyle={{ paddingBottom: 100 }}
         keyExtractor={(item) => item.id}
         data={onboardingSteps}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
-            <View style={{ width: width, justifyContent: "center" }}>
-              <Image
-                source={item.image}
-                style={{
-                  width: width / 2,
-                  height: height / 2,
-                  resizeMode: "contain",
-                }}
-              />
+            <View
+              style={{
+                width: width,
+                alignItems: "center",
+              }}
+            >
+              <View style={{ flex: 0.7, justifyContent: "center" }}>
+                <Image
+                  source={item.image}
+                  style={{
+                    width: width / 2,
+                    height: height / 2,
+                    resizeMode: "contain",
+                  }}
+                />
+              </View>
+              <View style={{ flex: 0.3 }}>
+                <Text className="font-bold text-xl text-center">
+                  {" "}
+                  {item.title}{" "}
+                </Text>
+                <Text className="text-center mt-2"> {item.description} </Text>
+              </View>
             </View>
           );
         }}
       />
 
-      {/* Onboarding content */}
+      {/* Indicator */}
     </SafeAreaView>
   );
 };
@@ -50,13 +65,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
-  },
-  background: {
-    flex: 1,
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: "100%",
   },
 });
