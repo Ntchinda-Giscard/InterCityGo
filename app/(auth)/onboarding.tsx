@@ -1,16 +1,8 @@
+import OnboardingButtonsIndicator from "@/components/onBoadingButtonsIndicator";
 import { onboardingSteps } from "@/constants/onboarding";
 import React, { useState } from "react";
-import {
-  Dimensions,
-  Image,
-  Pressable,
-  PressableProps,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import Animated, {
-  AnimatedProps,
   Extrapolation,
   interpolate,
   interpolateColor,
@@ -21,11 +13,6 @@ import Animated, {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("screen");
-
-const AnimatedComponent = Animated.createAnimatedComponent(Pressable);
-
-const _spacing = 8;
-const _buttonHeight = 42;
 
 const OnBoarding = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -89,21 +76,6 @@ const OnBoarding = () => {
     );
   };
 
-  function Button({
-    children,
-    style,
-    className,
-    ...rest
-  }: AnimatedProps<PressableProps>) {
-    return (
-      <AnimatedComponent className={className} style={style} {...rest}>
-        {typeof children === "function"
-          ? (state: any) => (children as (state: any) => React.ReactNode)(state)
-          : children}
-      </AnimatedComponent>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       {/* Flatlist */}
@@ -153,14 +125,11 @@ const OnBoarding = () => {
 
       {/* Indicator */}
       {/* <Indicator scrollX={scrollX} /> */}
-      <View className="flex-row items-center justify-center w-full">
-        <Button onPress={() => setActiveIndex(Math.max(0, activeIndex - 1))}>
-          <Text> Back </Text>
-        </Button>
-        <Button onPress={() => setActiveIndex(Math.min(2, activeIndex + 1))}>
-          {activeIndex == 2 ? <Text> Get Started </Text> : <Text> Next </Text>}
-        </Button>
-      </View>
+      <OnboardingButtonsIndicator
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+        totalSteps={onboardingSteps.length}
+      />
     </SafeAreaView>
   );
 };
