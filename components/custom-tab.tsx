@@ -66,7 +66,7 @@ export default function CustomTabBar({
         return (
           <MotiView key={route.key}>
             <AnimatedComponent
-              layout={LinearTransition.springify().damping(12).stiffness(200)}
+              layout={LinearTransition.springify().damping(12).stiffness(180)}
               key={route.key}
               href={buildHref(route.name, route.params)}
               accessibilityState={isFocused ? { selected: true } : {}}

@@ -1,5 +1,4 @@
 import { useSignIn } from "@clerk/clerk-expo";
-import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -62,46 +61,42 @@ const LoginRoute = () => {
   return (
     <View className="px-4">
       <TextInput
-        className="bg-white/20 rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
+        className="bg-brand-200 focus:bg-transparent border border-brand-300 text-brand-deep text-semibold rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
         placeholder="Phone Number / Email"
-        placeholderTextColor="rgba(255, 255, 255, 0.7)"
+        placeholderTextColor="#9133ea"
         value={formData.email_phone}
         onChangeText={(value) => handleInputChange("email_phone", value)}
         keyboardType="email-address"
         autoCapitalize="none"
       />
       <TextInput
-        className="bg-white/20 rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
+        className="bg-brand-200 focus:bg-transparent border border-brand-300 text-brand-deep text-semibold rounded-xl px-4 py-4 mb-4 text-base text-white min-h-[56px]"
         placeholder="Password"
-        placeholderTextColor="rgba(255, 255, 255, 0.7)"
+        placeholderTextColor="#9133ea"
         value={formData.password}
         onChangeText={(value) => handleInputChange("password", value)}
         secureTextEntry
       />
       <TouchableOpacity onPress={() => router.push("/forgot-password")}>
-        <Text className="text-white/50 font-normal text-right mb-4">
+        <Text className="text-brand-700 font-normal text-right mb-4">
           {" "}
           Forgot Password?{" "}
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={onSignInPress}>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.gradient}
-          colors={["#3B82F6", "#4F46E5"]}
-        >
-          {!isLoading && (
-            <Text className="text-white text-base font-semibold"> Login </Text>
-          )}
-          {isLoading && <ActivityIndicator color="white" />}
-        </LinearGradient>
+      <TouchableOpacity
+        onPress={onSignInPress}
+        className="bg-brand-600 rounded-xl py-4 justify-center items-center"
+      >
+        {!isLoading && (
+          <Text className="text-xl font-semibold text-white"> Login </Text>
+        )}
+        {isLoading && <ActivityIndicator color="white" />}
       </TouchableOpacity>
       <View className="flex-row items-center w-full mt-5 gap-4">
-        <View className="h-[1px] bg-white/50 rounded-full flex-1 mx-1" />
-        <Text className="text-white/50 font-normal">or continue with</Text>
-        <View className="h-[1px] bg-white/50 rounded-full flex-1 mx-1" />
+        <View className="h-[1px] bg-brand-700 rounded-full flex-1 mx-1" />
+        <Text className="text-brand-700 font-normal">or continue with</Text>
+        <View className="h-[1px] bg-brand-700 rounded-full flex-1 mx-1" />
       </View>
       <OAuth />
     </View>

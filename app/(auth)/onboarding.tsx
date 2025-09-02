@@ -1,7 +1,6 @@
 import AppButton from "@/components/app-button";
 import { onboardingSteps } from "@/constants/onboarding";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -25,12 +24,10 @@ const OnBoarding = () => {
       swiperRef.current?.scrollBy(1);
     }
   };
+
+  const _background = ["#3B82F6", "#9333EA"];
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={["#3B82F6", "#9333EA"]}
-        style={styles.background}
-      />
       {/* Top bar */}
       <View className="flex-row w-full justify-end px-4">
         <TouchableOpacity
@@ -102,7 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#9333EA",
+    backgroundColor: "#fff",
   },
   background: {
     flex: 1,

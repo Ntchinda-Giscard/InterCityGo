@@ -1,7 +1,6 @@
 import LoginRoute from "@/components/login-route";
 import SignupRoute from "@/components/signup-route";
 import { images } from "@/constants/images";
-import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import {
   Dimensions,
@@ -22,10 +21,6 @@ const Welcome = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={["#3B82F6", "#9333EA"]}
-        style={styles.background}
-      />
       <KeyboardAvoidingView
         className="flex-1"
         style={{ flex: 1 }}
@@ -36,26 +31,31 @@ const Welcome = () => {
           contentContainerStyle={{ paddingBottom: 10, flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
         >
-          <View className="  flex-1  items-center justify-center pt-[20px] px-4 ">
+          <View className="  flex-1 items-center justify-center pt-[20px] px-4 ">
             <Image source={images.logo} className="w-[80px] h-[80px]" />
-            <Text className="text-white text-2xl font-bold"> InterCityGo </Text>
-            <Text className="text-white text-lg font-light mt-2">
+            <Text className="text-white text-brand-800 text-2xl font-bold">
+              {" "}
+              CarGo{" "}
+            </Text>
+            <Text className="text-white text-lg text-brand-800 font-light mt-2">
               Travel smart between cities
             </Text>
             <View className="flex-1 w-full mt-6">
-              <View className="bg-white/20 flex-1 rounded-[24px] mt-4 py-4">
+              <View className="flex-1 rounded-[24px] mt-4 py-4 bg-brand-100 drop-shadow-xl">
                 <View className="flex-row mb-8 px-4">
                   <TouchableOpacity
                     className={`flex-1 py-3 items-center ${
-                      activeTab === "signup" ? "border-b-2 border-white" : ""
+                      activeTab === "signup"
+                        ? "border-b-2 border-brand-800"
+                        : ""
                     }`}
                     onPress={() => setActiveTab("signup")}
                   >
                     <Text
                       className={`text-base ${
                         activeTab === "signup"
-                          ? "text-white font-semibold"
-                          : "text-white/70"
+                          ? "text-white font-semibold text-brand-800"
+                          : "text-white/70 text-brand-800"
                       }`}
                     >
                       Sign Up
@@ -63,15 +63,15 @@ const Welcome = () => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     className={`flex-1 py-3 items-center ${
-                      activeTab === "login" ? "border-b-2 border-white" : ""
+                      activeTab === "login" ? "border-b-2 border-brand-800" : ""
                     }`}
                     onPress={() => setActiveTab("login")}
                   >
                     <Text
-                      className={`text-base ${
+                      className={`text-base  ${
                         activeTab === "login"
-                          ? "text-white font-semibold"
-                          : "text-white/70"
+                          ? "text-white font-semibold text-brand-800"
+                          : "text-white/70 text-brand-800"
                       }`}
                     >
                       Log In
@@ -93,7 +93,7 @@ export default Welcome;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#9333EA",
+    backgroundColor: "#ffffff",
     minHeight: screenHeight,
   },
   background: {
