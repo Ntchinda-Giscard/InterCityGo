@@ -2,9 +2,16 @@ import React from "react";
 import { Pressable, PressableProps, Text, View } from "react-native";
 import Animated, {
   AnimatedProps,
+  FadeInDown,
   FadeInLeft,
   FadeOut,
+  FadeOutUp,
+  interpolateColor,
   LinearTransition,
+  SharedValue,
+  useAnimatedStyle,
+  useDerivedValue,
+  withSpring,
 } from "react-native-reanimated";
 
 const AnimatedComponent = Animated.createAnimatedComponent(Pressable);
@@ -13,6 +20,10 @@ const _buttonHeight = 42;
 const layoutTransition = LinearTransition.springify()
   .damping(30)
   .stiffness(500);
+const _dotContainer = 24;
+const _dotSize = _dotContainer / 3;
+const _inactiveDot = "#fff";
+const _activeDot = "#000";
 
 function Button({
   children,
@@ -30,17 +41,121 @@ function Button({
           justifyContent: "center",
           alignItems: "center",
         },
-        style,
+        typeof style === "function"
+          ? style({
+              pressed: false,
+              hovered: false,
+            })
+          : style,
       ]}
       entering={FadeInLeft.springify().damping(30).stiffness(500)}
       exiting={FadeOut.springify().damping(30).stiffness(500)}
       layout={layoutTransition}
       {...rest}
     >
-      {typeof children === "function"
-        ? (state: any) => (children as (state: any) => React.ReactNode)(state)
-        : children}
+      {children}
     </AnimatedComponent>
+  );
+}
+
+function PaginationIndicator({
+  animation,
+}: {
+  animation: SharedValue<number>;
+}) {
+  const stylez = useAnimatedStyle(() => {
+    return {
+      width: _dotContainer + _dotContainer * animation.value,
+    };
+  });
+  return (
+    <Animated.View
+      style={[
+        {
+          backgroundColor: "white",
+          position: "absolute",
+          left: 0,
+          top: 0,
+          height: _dotContainer,
+          width: _dotContainer,
+          borderRadius: _dotContainer,
+        },
+        stylez,
+      ]}
+    />
+  );
+}
+
+function Dot({
+  index,
+  animation,
+}: {
+  index: number;
+  animation: SharedValue<number>;
+}) {
+  const stylez = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(
+        animation.value,
+        [index - 1, index, index + 1],
+        [_inactiveDot, _activeDot, _activeDot]
+      ),
+    };
+  });
+  return (
+    <View
+      style={{
+        width: _dotContainer,
+        height: _dotContainer,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Animated.View
+        style={[
+          stylez,
+          {
+            width: _dotSize,
+            height: _dotSize,
+            borderRadius: _dotSize,
+          },
+        ]}
+      />
+    </View>
+  );
+}
+function Pagination({
+  activeIndex,
+  total,
+}: {
+  activeIndex: number;
+  total: number;
+}) {
+  const animation = useDerivedValue(() => {
+    return withSpring(activeIndex, {
+      damping: 20,
+      stiffness: 500,
+    });
+  });
+  return (
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 10,
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+        }}
+      >
+        <PaginationIndicator animation={animation} />
+        {[...Array(total).keys()].map((i) => (
+          <Dot key={`dot-${i}`} index={i} animation={animation} />
+        ))}
+      </View>
+    </View>
   );
 }
 
@@ -54,28 +169,46 @@ const OnboardingButtonsIndicator = ({
   totalSteps: number;
 }) => {
   return (
-    <View
-      className="flex-row items-center justify-center w-full gap-4"
-      style={{ paddingHorizontal: 30 }}
-    >
-      {activeIndex > 0 && (
-        <Button
-          className={"bg-white/50 border border-white px-4"}
-          onPress={() => setActiveIndex(Math.max(0, activeIndex - 1))}
-        >
-          <Text> Back </Text>
-        </Button>
-      )}
-      <Button
-        className={"bg-white px-4 flex-1"}
-        onPress={() => setActiveIndex(Math.min(2, activeIndex + 1))}
+    <View>
+      <Pagination activeIndex={activeIndex} total={totalSteps} />
+      <View
+        className="flex-row items-center justify-center w-full gap-4"
+        style={{ paddingHorizontal: 30 }}
       >
-        {activeIndex == totalSteps - 1 ? (
-          <Animated.Text> Get Started </Animated.Text>
-        ) : (
-          <Animated.Text layout={layoutTransition}> Next </Animated.Text>
+        {activeIndex > 0 && (
+          <Button
+            className={"bg-white/50 border border-white px-4"}
+            onPress={() => setActiveIndex(Math.max(0, activeIndex - 1))}
+          >
+            <Text> Back </Text>
+          </Button>
         )}
-      </Button>
+        <Button
+          className={"bg-white px-4 flex-1"}
+          onPress={() => setActiveIndex(Math.min(2, activeIndex + 1))}
+        >
+          {activeIndex == totalSteps - 1 ? (
+            <Animated.Text
+              key={"getstarted"}
+              entering={FadeInDown.springify().damping(30).stiffness(500)}
+              exiting={FadeOutUp.springify().damping(30).stiffness(500)}
+            >
+              {" "}
+              Get Started{" "}
+            </Animated.Text>
+          ) : (
+            <Animated.Text
+              key={"next"}
+              layout={layoutTransition}
+              entering={FadeInDown.springify().damping(30).stiffness(500)}
+              exiting={FadeOutUp.springify().damping(30).stiffness(500)}
+            >
+              {" "}
+              Next{" "}
+            </Animated.Text>
+          )}
+        </Button>
+      </View>
     </View>
   );
 };
