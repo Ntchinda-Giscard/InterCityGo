@@ -27,6 +27,7 @@ const OnBoarding = () => {
   const onScroll = useAnimatedScrollHandler({
     onScroll: (ev) => {
       scrollX.value = ev.contentOffset.x;
+      console.log("Scroll X:", ev.contentOffset.x);
     },
   });
 
@@ -39,6 +40,11 @@ const OnBoarding = () => {
         animated: true,
       });
     }
+  };
+
+  const handleMomentumScrollEnd = (event: any) => {
+    const index = Math.round(event.nativeEvent.contentOffset.x / width);
+    setActiveIndex(index);
   };
 
   // Backdrop animated background
@@ -59,7 +65,7 @@ const OnBoarding = () => {
   };
 
   // Rotating square animation
-  const Square = ({ scrollX }: { scrollX: Animated.SharedValue<number> }) => {
+  const Circles = ({ scrollX }: { scrollX: Animated.SharedValue<number> }) => {
     const animatedStyle = useAnimatedStyle(() => {
       const pageProgress = (scrollX.value % width) / width;
 
@@ -110,10 +116,7 @@ const OnBoarding = () => {
         showsHorizontalScrollIndicator={false}
         horizontal
         pagingEnabled
-        onMomentumScrollEnd={(event) => {
-          const index = Math.round(event.nativeEvent.contentOffset.x / width);
-          setActiveIndex(index);
-        }}
+        onMomentumScrollEnd={handleMomentumScrollEnd}
         renderItem={({ item }) => {
           return (
             <View
@@ -122,7 +125,7 @@ const OnBoarding = () => {
                 alignItems: "center",
               }}
             >
-              <View
+              <Animated.View
                 style={{
                   flex: 0.85,
                   justifyContent: "center",
@@ -136,7 +139,7 @@ const OnBoarding = () => {
                     resizeMode: "contain",
                   }}
                 />
-              </View>
+              </Animated.View>
             </View>
           );
         }}
@@ -167,7 +170,7 @@ const OnBoarding = () => {
       {/* Indicator buttons */}
       <OnboardingButtonsIndicator
         activeIndex={activeIndex}
-        setActiveIndex={setActiveIndex}
+        setActiveIndex={handleIndexChange}
         totalSteps={onboardingSteps.length}
       />
     </SafeAreaView>

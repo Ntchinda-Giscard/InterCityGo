@@ -34,9 +34,9 @@ export const onboardingSteps = [
   },
   {
     id: 3,
-    title: "Pay Securely",
+    title: "Have a Safe Journey",
     description:
-      "Choose from multiple secure payment methods with protected transactions and no hidden fees.",
+      "Sit back and enjoy a smooth, reliable, and secure travel experience, with peace of mind every step of the way.",
     image: onboardingImages.onboarding4,
   },
 ];
