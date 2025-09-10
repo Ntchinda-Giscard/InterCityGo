@@ -1,7 +1,7 @@
 import OnboardingButtonsIndicator from "@/components/onBoadingButtonsIndicator";
 import { onboardingSteps } from "@/constants/onboarding";
 import React, { useState } from "react";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, View } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
@@ -79,9 +79,33 @@ const OnBoarding = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Flatlist */}
-      <BackDrop scrollX={scrollX} />
-      <Square scrollX={scrollX} />
+      {/* <BackDrop scrollX={scrollX} />
+      <Square scrollX={scrollX} /> */}
       <Animated.FlatList
+        data={onboardingSteps}
+        scrollEventThrottle={16}
+        keyExtractor={(item) => item.id}
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        pagingEnabled
+        renderItem={({ item }) => {
+          return (
+            <View style={{ width: width, alignItems: "center" }}>
+              <View style={{ flex: 0.7, justifyContent: "center" }}>
+                <Image
+                  source={item.image}
+                  style={{
+                    width: width / 2,
+                    height: height / 2,
+                    resizeMode: "contain",
+                  }}
+                />
+              </View>
+            </View>
+          );
+        }}
+      />
+      {/* <Animated.FlatList
         pagingEnabled
         scrollEventThrottle={16}
         contentContainerStyle={{ paddingBottom: 50 }}
@@ -121,7 +145,7 @@ const OnBoarding = () => {
             </View>
           );
         }}
-      />
+      /> */}
 
       {/* Indicator */}
       {/* <Indicator scrollX={scrollX} /> */}

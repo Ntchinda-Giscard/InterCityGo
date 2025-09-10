@@ -1,11 +1,13 @@
-import onboarding1 from "@/assets/images/onboarding1.png";
-import onboarding2 from "@/assets/images/onboarding2.png";
-import onboarding3 from "@/assets/images/onboarding3.png";
+import onboarding1 from "@/assets/images/ob1.png";
+import onboarding2 from "@/assets/images/ob2.png";
+import onboarding3 from "@/assets/images/ob3.png";
+import onboarding4 from "@/assets/images/ob4.png";
 
 export const onboardingImages = {
   onboarding1,
   onboarding2,
   onboarding3,
+  onboarding4,
 };
 
 export const onboardingSteps = [
@@ -29,5 +31,12 @@ export const onboardingSteps = [
     description:
       "Choose from multiple secure payment methods with protected transactions and no hidden fees.",
     image: onboardingImages.onboarding3,
+  },
+  {
+    id: "4",
+    title: "Pay Securely",
+    description:
+      "Choose from multiple secure payment methods with protected transactions and no hidden fees.",
+    image: onboardingImages.onboarding4,
   },
 ];

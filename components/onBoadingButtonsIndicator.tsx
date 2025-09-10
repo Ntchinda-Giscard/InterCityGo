@@ -22,8 +22,8 @@ const layoutTransition = LinearTransition.springify()
   .stiffness(500);
 const _dotContainer = 24;
 const _dotSize = _dotContainer / 3;
-const _inactiveDot = "#fff";
-const _activeDot = "#000";
+const _inactiveDot = "#6230f7";
+const _activeDot = "#fff";
 
 function Button({
   children,
@@ -72,7 +72,7 @@ function PaginationIndicator({
     <Animated.View
       style={[
         {
-          backgroundColor: "white",
+          backgroundColor: "#6230f7",
           position: "absolute",
           left: 0,
           top: 0,
@@ -177,19 +177,20 @@ const OnboardingButtonsIndicator = ({
       >
         {activeIndex > 0 && (
           <Button
-            className={"bg-white/50 border border-white px-4"}
+            className={"px-4  border border-brand-600 "}
             onPress={() => setActiveIndex(Math.max(0, activeIndex - 1))}
           >
-            <Text> Back </Text>
+            <Text className="text-brand-600"> Back </Text>
           </Button>
         )}
         <Button
-          className={"bg-white px-4 flex-1"}
-          onPress={() => setActiveIndex(Math.min(2, activeIndex + 1))}
+          className={" px-4 flex-1 bg-brand-600"}
+          onPress={() => setActiveIndex(Math.min(3, activeIndex + 1))}
         >
           {activeIndex == totalSteps - 1 ? (
             <Animated.Text
               key={"getstarted"}
+              className={"text-white"}
               entering={FadeInDown.springify().damping(30).stiffness(500)}
               exiting={FadeOutUp.springify().damping(30).stiffness(500)}
             >
@@ -199,6 +200,7 @@ const OnboardingButtonsIndicator = ({
           ) : (
             <Animated.Text
               key={"next"}
+              className={"text-white"}
               layout={layoutTransition}
               entering={FadeInDown.springify().damping(30).stiffness(500)}
               exiting={FadeOutUp.springify().damping(30).stiffness(500)}
