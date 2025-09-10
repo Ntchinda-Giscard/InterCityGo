@@ -22,7 +22,7 @@ const layoutTransition = LinearTransition.springify()
   .stiffness(500);
 const _dotContainer = 24;
 const _dotSize = _dotContainer / 3;
-const _inactiveDot = "#6230f7";
+const _inactiveDot = "#7D5FFF";
 const _activeDot = "#fff";
 
 function Button({
@@ -72,7 +72,7 @@ function PaginationIndicator({
     <Animated.View
       style={[
         {
-          backgroundColor: "#6230f7",
+          backgroundColor: "#7D5FFF",
           position: "absolute",
           left: 0,
           top: 0,
@@ -143,6 +143,7 @@ function Pagination({
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 10,
+        paddingHorizontal: 30,
       }}
     >
       <View
@@ -169,7 +170,7 @@ const OnboardingButtonsIndicator = ({
   totalSteps: number;
 }) => {
   return (
-    <View>
+    <View className="pb-6">
       <Pagination activeIndex={activeIndex} total={totalSteps} />
       <View
         className="flex-row items-center justify-center w-full gap-4"
@@ -177,14 +178,14 @@ const OnboardingButtonsIndicator = ({
       >
         {activeIndex > 0 && (
           <Button
-            className={"px-4  border border-brand-600 "}
+            className={"px-4  border border-brand-500 "}
             onPress={() => setActiveIndex(Math.max(0, activeIndex - 1))}
           >
-            <Text className="text-brand-600"> Back </Text>
+            <Text className="text-brand-500"> Back </Text>
           </Button>
         )}
         <Button
-          className={" px-4 flex-1 bg-brand-600"}
+          className={" px-4 flex-1 bg-brand-500"}
           onPress={() => setActiveIndex(Math.min(3, activeIndex + 1))}
         >
           {activeIndex == totalSteps - 1 ? (

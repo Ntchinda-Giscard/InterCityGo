@@ -12,28 +12,28 @@ export const onboardingImages = {
 
 export const onboardingSteps = [
   {
-    id: "1",
-    title: "Travel Between Cities Easily",
+    id: 0,
+    title: "Find Trips Near You",
     description:
       "Connect with drivers heading your way for convenient and affordable intercity travel.",
     image: onboardingImages.onboarding1,
   },
   {
-    id: "2",
+    id: 1,
     title: "Meet Verified Drivers",
     description:
       "All our drivers are verified with background checks and reliable reviews from other travelers.",
     image: onboardingImages.onboarding2,
   },
   {
-    id: "3",
-    title: "Pay Securely",
+    id: 2,
+    title: "Chat with Drivers Easily",
     description:
-      "Choose from multiple secure payment methods with protected transactions and no hidden fees.",
+      "Stay connected before and during your trip with our built-in chat feature, helping you ease pick-ups.",
     image: onboardingImages.onboarding3,
   },
   {
-    id: "4",
+    id: 3,
     title: "Pay Securely",
     description:
       "Choose from multiple secure payment methods with protected transactions and no hidden fees.",
