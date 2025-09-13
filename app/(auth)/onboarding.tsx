@@ -16,7 +16,9 @@ import Animated, {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("screen");
-const _circle_width = 200;
+const _circleSize1 = 350;
+const _circleSize2 = 150;
+const _circleSize3 = 150;
 
 const OnBoarding = () => {
   const flatListRef = useRef<Animated.FlatList<any>>(null);
@@ -84,24 +86,67 @@ const OnBoarding = () => {
     });
 
     return (
-      <Animated.View
-        style={[
-          {
-            width: _circle_width,
-            height: _circle_width,
-            borderRadius: _circle_width,
-            backgroundColor: "transparent",
-            borderBottomEndRadius: _circle_width,
-            borderBottomStartRadius: _circle_width,
-            borderWidth: 10,
-            borderColor: "black",
-            // top: -height * 0.6,
-            // left: -height * 0.3,
-            position: "absolute",
-          },
-          animatedStyle,
-        ]}
-      />
+      <Animated.View>
+        <Animated.View
+          style={[
+            {
+              width: _circleSize1,
+              height: _circleSize1,
+              borderRadius: _circleSize1,
+              backgroundColor: "transparent",
+              borderBottomEndRadius: _circleSize1,
+              borderBottomStartRadius: _circleSize1,
+              borderWidth: 10,
+              borderColor: "purple",
+              // top: 100,
+              top: -10,
+              // left: -width * 0.3,
+              position: "absolute",
+            },
+            animatedStyle,
+          ]}
+        />
+
+        <Animated.View
+          style={[
+            {
+              width: _circleSize2,
+              height: _circleSize2,
+              borderRadius: _circleSize2,
+              backgroundColor: "transparent",
+              borderBottomEndRadius: _circleSize2,
+              borderBottomStartRadius: _circleSize2,
+              borderWidth: 20,
+              borderColor: "purple",
+              // top: 100,
+              top: -100,
+              left: -width * 0.3,
+              position: "absolute",
+            },
+            animatedStyle,
+          ]}
+        />
+
+        <Animated.View
+          style={[
+            {
+              width: _circleSize3,
+              height: _circleSize3,
+              borderRadius: _circleSize3,
+              backgroundColor: "transparent",
+              borderBottomEndRadius: _circleSize3,
+              borderBottomStartRadius: _circleSize3,
+              borderWidth: 15,
+              borderColor: "purple",
+              // top: 100,
+              top: 50,
+              left: -width * 0.5,
+              position: "absolute",
+            },
+            animatedStyle,
+          ]}
+        />
+      </Animated.View>
     );
   };
 

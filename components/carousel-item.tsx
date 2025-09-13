@@ -62,6 +62,7 @@ const CarouselItem = (props: CarouselItemProps) => {
             width: width,
             height: height,
             resizeMode: "contain",
+            backgroundColor: "transparent",
           }}
         />
       </Animated.View>
