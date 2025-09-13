@@ -24,10 +24,11 @@ const CarouselItem = (props: CarouselItemProps) => {
   const { item, index, scrollX } = props;
 
   const itemOpacity = useAnimatedStyle(() => {
+    const newValue = scrollX.value;
     const inputRange = [
-      (index - 1) * width,
+      (index - 0.2) * width,
       index * width,
-      (index + 1) * width,
+      (index + 0.2) * width,
     ];
 
     return {
