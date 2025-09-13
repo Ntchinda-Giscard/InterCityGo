@@ -26,13 +26,17 @@ const CarouselItem = (props: CarouselItemProps) => {
   const itemOpacity = useAnimatedStyle(() => {
     const newValue = scrollX.value;
     const inputRange = [
-      (index - 0.2) * width,
+      (index - 0.5) * width,
       index * width,
-      (index + 0.2) * width,
+      (index + 0.5) * width,
     ];
 
+    const opacity = interpolate(scrollX.value, inputRange, [0.2, 1, 0.2]);
+    const scale = interpolate(scrollX.value, inputRange, [0.7, 1, 0.7]);
+
     return {
-      opacity: interpolate(scrollX.value, inputRange, [0, 1, 0]),
+      opacity,
+      transform: [{ scale }],
     };
   });
 
