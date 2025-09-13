@@ -16,6 +16,7 @@ import Animated, {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("screen");
+const _circle_width = 200;
 
 const OnBoarding = () => {
   const flatListRef = useRef<Animated.FlatList<any>>(null);
@@ -86,12 +87,16 @@ const OnBoarding = () => {
       <Animated.View
         style={[
           {
-            width: height,
-            height: height,
-            borderRadius: 150,
-            backgroundColor: "white",
-            top: -height * 0.6,
-            left: -height * 0.3,
+            width: _circle_width,
+            height: _circle_width,
+            borderRadius: _circle_width,
+            backgroundColor: "transparent",
+            borderBottomEndRadius: _circle_width,
+            borderBottomStartRadius: _circle_width,
+            borderWidth: 10,
+            borderColor: "black",
+            // top: -height * 0.6,
+            // left: -height * 0.3,
             position: "absolute",
           },
           animatedStyle,
@@ -103,8 +108,8 @@ const OnBoarding = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Background effects */}
-      {/* <BackDrop scrollX={scrollX} />
-      <Square scrollX={scrollX} /> */}
+      {/* <BackDrop scrollX={scrollX} /> */}
+      <Circles scrollX={scrollX} />
 
       {/* Main onboarding flatlist */}
       <Animated.FlatList
