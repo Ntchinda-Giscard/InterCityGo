@@ -17,7 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("screen");
 const _circleSize1 = 350;
-const _circleSize2 = 150;
+const _circleSize2 = 300;
 const _circleSize3 = 150;
 
 const OnBoarding = () => {
@@ -81,7 +81,12 @@ const OnBoarding = () => {
       );
 
       return {
-        transform: [{ rotate: `${rotate}deg` }, { translateX }],
+        transform: [
+          { rotate: `${rotate}deg` },
+          {
+            translateX: translateX,
+          },
+        ],
       };
     });
 
@@ -100,8 +105,9 @@ const OnBoarding = () => {
               borderColor: "purple",
               // top: 100,
               top: -10,
-              // left: -width * 0.3,
+              left: -width * 0.3,
               position: "absolute",
+              zIndex: 9,
             },
             animatedStyle,
           ]}
@@ -119,8 +125,8 @@ const OnBoarding = () => {
               borderWidth: 20,
               borderColor: "purple",
               // top: 100,
-              top: -100,
-              left: -width * 0.3,
+              top: 200,
+              left: -width * 0.6,
               position: "absolute",
             },
             animatedStyle,
