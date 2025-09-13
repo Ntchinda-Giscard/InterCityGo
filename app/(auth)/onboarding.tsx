@@ -1,7 +1,8 @@
+import CarouselItem from "@/components/carousel-item";
 import OnboardingButtonsIndicator from "@/components/onBoadingButtonsIndicator";
 import { onboardingSteps } from "@/constants/onboarding";
 import React, { useRef, useState } from "react";
-import { Dimensions, Image, StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, {
   Extrapolation,
   FadeInLeft,
@@ -27,7 +28,6 @@ const OnBoarding = () => {
   const onScroll = useAnimatedScrollHandler({
     onScroll: (ev) => {
       scrollX.value = ev.contentOffset.x;
-      console.log("Scroll X:", ev.contentOffset.x);
     },
   });
 
@@ -117,32 +117,7 @@ const OnBoarding = () => {
         horizontal
         pagingEnabled
         onMomentumScrollEnd={handleMomentumScrollEnd}
-        renderItem={({ item }) => {
-          return (
-            <View
-              style={{
-                width: width,
-                alignItems: "center",
-              }}
-            >
-              <Animated.View
-                style={{
-                  flex: 0.85,
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  source={item.image}
-                  style={{
-                    width: width,
-                    height: height,
-                    resizeMode: "contain",
-                  }}
-                />
-              </Animated.View>
-            </View>
-          );
-        }}
+        renderItem={(props) => <CarouselItem scrollX={scrollX} {...props} />}
       />
 
       {/* Animated title and description */}
