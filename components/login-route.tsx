@@ -86,7 +86,7 @@ const LoginRoute = () => {
 
       <TouchableOpacity
         onPress={onSignInPress}
-        className="bg-brand-600 rounded-xl py-4 justify-center items-center"
+        className="bg-brand-500 rounded-xl py-4 justify-center items-center"
       >
         {!isLoading && (
           <Text className="text-xl font-semibold text-white"> Login </Text>

@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import React from "react";
 import { Pressable, PressableProps, Text, View } from "react-native";
 import Animated, {
@@ -186,7 +187,12 @@ const OnboardingButtonsIndicator = ({
         )}
         <Button
           className={" px-4 flex-1 bg-brand-500"}
-          onPress={() => setActiveIndex(Math.min(3, activeIndex + 1))}
+          onPress={() => {
+            setActiveIndex(Math.min(3, activeIndex + 1));
+            activeIndex == totalSteps - 1
+              ? router.replace("/(auth)/welcome")
+              : null;
+          }}
         >
           {activeIndex == totalSteps - 1 ? (
             <Animated.Text
