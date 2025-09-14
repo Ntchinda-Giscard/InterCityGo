@@ -14,10 +14,18 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 const screenHeight = Dimensions.get("window").height;
+const { width, height } = Dimensions.get("screen");
+
+const _tab_width = width / 3;
 
 const Welcome = () => {
   const [activeTab, setActiveTab] = useState("login");
+  const offset = useSharedValue<number>(-_tab_width);
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [{ translateX: offset.value }],
+  }));
 
   return (
     <SafeAreaView style={styles.container}>

@@ -86,12 +86,12 @@ const LoginRoute = () => {
 
       <TouchableOpacity
         onPress={onSignInPress}
-        className="bg-brand-500 rounded-xl py-4 justify-center items-center"
+        className="bg-brand-500 rounded-2xl py-4 justify-center items-center"
       >
         {!isLoading && (
           <Text className="text-xl font-semibold text-white"> Login </Text>
         )}
-        {isLoading && <ActivityIndicator color="white" />}
+        {isLoading && <ActivityIndicator size={26} color="white" />}
       </TouchableOpacity>
       <View className="flex-row items-center w-full mt-5 gap-4">
         <View className="h-[1px] bg-brand-700 rounded-full flex-1 mx-1" />
