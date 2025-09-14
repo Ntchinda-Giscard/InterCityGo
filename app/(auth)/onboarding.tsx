@@ -12,6 +12,8 @@ import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
+  withTiming,
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -72,12 +74,24 @@ const OnBoarding = () => {
     const animatedStyle = useAnimatedStyle(() => {
       const pageProgress = (scrollX.value % width) / width;
 
-      const rotate = interpolate(pageProgress, [0, 0.5, 1], [35, 10, 35]);
-      const translateX = interpolate(
-        pageProgress,
-        [0, 0.5, 1],
-        [0, -width / 2, 0],
-        Extrapolation.CLAMP
+      const rotate = withDelay(
+        activeIndex * 200,
+        withTiming(interpolate(pageProgress, [0, 0.5, 1], [35, 10, 35]), {
+          duration: 300,
+        })
+      );
+
+      const translateX = withDelay(
+        activeIndex * 200,
+        withTiming(
+          interpolate(
+            pageProgress,
+            [0, 0.5, 1],
+            [0, -width / 2, 0],
+            Extrapolation.CLAMP
+          ),
+          { duration: 300 }
+        )
       );
 
       return {
