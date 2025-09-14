@@ -71,6 +71,9 @@ const OnBoarding = () => {
 
   // Rotating square animation
   const Circles = ({ scrollX }: { scrollX: Animated.SharedValue<number> }) => {
+    const rotate = useSharedValue<number>(0);
+    const translateX = useSharedValue<number>(0);
+
     const animatedStyle = useAnimatedStyle(() => {
       const pageProgress = (scrollX.value % width) / width;
 
@@ -174,7 +177,7 @@ const OnBoarding = () => {
     <SafeAreaView style={styles.container}>
       {/* Background effects */}
       {/* <BackDrop scrollX={scrollX} /> */}
-      <Circles scrollX={scrollX} />
+      {/* <Circles scrollX={scrollX} /> */}
 
       {/* Main onboarding flatlist */}
       <Animated.FlatList
