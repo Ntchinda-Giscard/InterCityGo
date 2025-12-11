@@ -1,116 +1,85 @@
-import LoginRoute from "@/components/login-route";
-import SignupRoute from "@/components/signup-route";
-import { images } from "@/constants/images";
-import React, { useState } from "react";
+import React from "react";
 import {
   Dimensions,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
-const screenHeight = Dimensions.get("window").height;
+import Animated, {
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
+
 const { width, height } = Dimensions.get("screen");
 
-const _tab_width = width / 3;
+const _tab_width = width * 0.8;
 
-const Welcome = () => {
-  const [activeTab, setActiveTab] = useState("login");
-  const offset = useSharedValue<number>(-_tab_width);
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{ translateX: offset.value }],
+const SimpleTest = () => {
+  const translateX = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translateX.value }],
   }));
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        className="flex-1"
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"} // iOS lifts, Android shrinks
-        keyboardVerticalOffset={10} // adjust if you have a header
-      >
-        <ScrollView
-          contentContainerStyle={{ paddingBottom: 10, flexGrow: 1 }}
-          showsVerticalScrollIndicator={false}
-        >
-          <View className="  flex-1 items-center justify-center pt-[20px] px-4">
-            <Image source={images.logo} className="w-[80px] h-[80px]" />
-            <Text className="text-brand-800 text-2xl font-bold"> CarGo </Text>
-            <Text className="text-lg text-brand-800 font-light mt-2">
-              Travel smart between cities
-            </Text>
-            <View className="flex-1 w-full mt-6">
-              <View
-                className="flex-1 rounded-[24px] mt-4 py-4 bg-brand-100 drop-shadow-xl"
-                style={{ boxShadow: " 0px 15px 20px -22px black " }}
-              >
-                <View className="flex-row mb-8 px-4">
-                  <TouchableOpacity
-                    className={`flex-1 py-3 items-center ${
-                      activeTab === "signup"
-                        ? "border-b-2 border-brand-800"
-                        : ""
-                    }`}
-                    onPress={() => setActiveTab("signup")}
-                  >
-                    <Text
-                      className={`text-base ${
-                        activeTab === "signup"
-                          ? "font-semibold text-brand-800"
-                          : "text-brand-800/70"
-                      }`}
-                    >
-                      Sign Up
-                    </Text>
-                  </TouchableOpacity>
+  const moveBox = () => {
+    console.log("Button pressed!"); // Check if this logs
+    translateX.value = withSpring(
+      translateX.value === 0 ? _tab_width * 0.25 : 0,
+      {
+        duration: 550,
+        dampingRatio: 0.75,
+        mass: 4,
+        overshootClamping: undefined,
+        energyThreshold: 6e-9,
+        reduceMotion: ReduceMotion.System,
+      }
+    );
+  };
 
-                  <TouchableOpacity
-                    className={`flex-1 py-3 items-center ${
-                      activeTab === "login" ? "border-b-2 border-brand-800" : ""
-                    }`}
-                    onPress={() => setActiveTab("login")}
-                  >
-                    <Text
-                      className={`text-base  ${
-                        activeTab === "login"
-                          ? " font-semibold text-brand-800"
-                          : " text-brand-800/70"
-                      }`}
-                    >
-                      Log In
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                {activeTab === "signup" ? <SignupRoute /> : <LoginRoute />}
-              </View>
-            </View>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={() => moveBox()} style={styles.button}>
+        <Text>Move Box</Text>
+      </TouchableOpacity>
+
+      <Animated.View
+        className="bg-brand-700"
+        style={[
+          {
+            height: 8,
+            width: 64,
+            borderRadius: 20,
+            marginLeft: -64 / 2,
+          },
+          animatedStyle,
+        ]}
+      />
+    </View>
   );
 };
-
-export default Welcome;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
-    minHeight: screenHeight,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
   },
-  background: {
-    flex: 1,
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: "100%",
+  button: {
+    backgroundColor: "#007AFF",
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 30,
+  },
+  box: {
+    width: 50,
+    height: 50,
+    backgroundColor: "red",
+    borderRadius: 8,
   },
 });
+
+export default SimpleTest;
